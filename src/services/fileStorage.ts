@@ -73,7 +73,7 @@ export class FileStorageService {
     if (!fileRecord) return false;
 
     try {
-      await fs.unlink(fileRecord.filePath);
+      await fs.unlink(fileRecord.filePathDL);
       this.fileRecords.delete(fileId);
 
       return true;
@@ -114,7 +114,7 @@ export class FileStorageService {
     if (!fileRecord) return null;
 
     try {
-      const stream = await fs.open(fileRecord.filePath, 'r');
+      const stream = await fs.open(fileRecord.filePathDL, 'r');
 
       return {
         stream: stream.createReadStream(),
