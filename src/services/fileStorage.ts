@@ -33,9 +33,10 @@ export class FileStorageService {
     const fileId = metadata.fileId || uuidv4();
     const fileExtension = path.extname(file.originalname);
     const fileName = `${fileId}${fileExtension}`;
-    const filePath = path.join(DOWNLOAD_DIR, fileName);
+    const filePathUL = path.join(UPLOAD_DIR, fileName);
+    const filePathDL = path.join(DOWNLOAD_DIR, fileName);
 
-    await fs.writeFile(filePath, file.buffer);
+    await fs.writeFile(filePathUL, file.buffer);
 
     const fileRecord: IFileRecord = {
       fileId,
@@ -47,7 +48,7 @@ export class FileStorageService {
       userId,
       customerId,
       createdAt: Date.now(),
-      filePath,
+      filePathDL,
       metadata,
     };
 
